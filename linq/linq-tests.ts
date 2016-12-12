@@ -1,6 +1,32 @@
-/// <reference path='../jasmine/jasmine.d.ts'/>
 /// <reference path='linq.d.ts'/>
-// <reference path="c:/linq.js" /> tests were run from VisualStudio + Resharper7
+
+var describe = (name: string, fkt: () => any) => {
+    console.log("Running test suite: " + name);
+    fkt();
+};
+
+var it = (name: string, fkt: () => any) => {
+    console.log("Running test: " + name + "...");
+    fkt();
+};
+
+var expect = (obj: any) => {
+    return {
+        toBe: (obj2: any) => {
+            if (obj === obj2) {
+                console.log("\t Passed.");
+            }
+            else
+            { 
+                console.log("Expected:");
+                console.log(obj2);
+                console.log("but got:");
+                console.log(obj);
+                throw "Test failed.";
+            }
+        }
+    };
+};
 
 describe("Linq.js tests", function () {
     it("Projection and Filtering Methods", function () {
